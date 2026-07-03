@@ -7,7 +7,7 @@
     <title>Formulaire</title>
 </head>
 <body>
-    <form action="/ordi" method="post">
+    <form action="${pageContext.request.contextPath}/ordi" method="post">
     <label for="idmodele">Modele :</label>
     <select name="idmodele" id="idmodele">
         <option value="1">Modele 1</option>

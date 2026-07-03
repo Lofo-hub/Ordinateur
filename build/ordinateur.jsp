@@ -32,10 +32,10 @@
 %>
         <tr>
             <td><%= ordinateur.getId() %></td>  
-            <td><%= ordinateur.getModele() %></td>
+            <td><%= ordinateur.getModelid() %></td>
             <td><%= ordinateur.getRam() %></td>
             <td><%= ordinateur.getProcesseur() %></td>
-            <td><%= ordinateur.getDisqueDur() %></td>
+            <td><%= ordinateur.getDisque_dur() %></td>
         </tr>
 <%
         }

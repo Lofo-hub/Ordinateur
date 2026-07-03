@@ -9,7 +9,7 @@ import model.*;
 public class OrdinateurServlet extends HttpServlet{
      protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        res.setContentType("text/plain");
+        res.setContentType("text/html");
         Ordinateur o = new Ordinateur();
         try {
             List<Ordinateur> ordinateurList = o.findall();
@@ -17,7 +17,7 @@ public class OrdinateurServlet extends HttpServlet{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("ordinateur.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/ordinateur.jsp");
         dispatcher.forward(req, res);
         }
         
