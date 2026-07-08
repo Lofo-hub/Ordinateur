@@ -58,18 +58,17 @@ public class Ordinateur {
         this.disque_dur = disque_dur;
     }
 
-      public void insert(Ordinateur o) throws SQLException {
-        String sql = "INSERT INTO ordinateur (id, modelid, ram, processeur, disque_dur) "
-                   + "VALUES (?, ?, ?, ?, ?)";
+      public void insert() throws SQLException {
+        String sql = "INSERT INTO ordinateur (id_modele, ram, processeur, disque_dur) "
+                   + "VALUES (?, ?, ?, ?)";
 
         Connection conn = DBConnection.getConnexion();
         PreparedStatement ps = conn.prepareStatement(sql);
 
-        ps.setInt(1, o.getId());
-        ps.setInt(2, o.getModelid());
-        ps.setString(3, o.getRam());
-        ps.setString(4, o.getProcesseur());
-        ps.setInt(5, o.getDisque_dur());
+        ps.setInt(1, this.getModelid());
+        ps.setString(2, this.getRam());
+        ps.setString(3, this.getProcesseur());
+        ps.setInt(4, this.getDisque_dur());
 
         ps.executeUpdate();
         ps.close();

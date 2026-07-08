@@ -33,6 +33,12 @@ public class OrdinateurServlet extends HttpServlet{
         o.setRam(ram);
         o.setProcesseur(processeur);   
         o.setDisque_dur(disque_dur); 
+        try {
+            o.insert();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         res.sendRedirect(req.getContextPath() + "/ordi");
         
     }

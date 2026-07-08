@@ -43,6 +43,8 @@
     </table>
 <%
     } else {
+        
+    }
 %>
     <p>Aucun ordinateur trouvé.</p> 
   
