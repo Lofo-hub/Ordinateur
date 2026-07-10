@@ -14,10 +14,15 @@ public class DBConnection {
 
     private static Connection connexion = null;
 
-    public static Connection getConnexion() throws SQLException {
+
+    public static Connection getConnection() throws SQLException {
         if (connexion == null || connexion.isClosed()) {
-            connexion = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Connexion PostgreSQL établie.");
+            try {
+                Class.forName("org.postgresql.Driver");
+                connexion = DriverManager.getConnection(URL, USER, PASSWORD);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
         return connexion;
     }

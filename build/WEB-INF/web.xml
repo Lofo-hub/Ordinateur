@@ -15,4 +15,14 @@ version="2.4">
 <url-pattern>/ordi</url-pattern>
 </servlet-mapping>
 
+<servlet>
+<servlet-name>ShowFormOrdiServlet</servlet-name>
+<servlet-class>ShowFormOrdiServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>ShowFormOrdiServlet</servlet-name>
+<url-pattern>/</url-pattern>
+</servlet-mapping>
+
 </web-app>

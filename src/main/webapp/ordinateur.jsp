@@ -25,6 +25,8 @@
             <th>RAM</th>
             <th>Processeur</th>
             <th>Disque Dur</th>
+            <th>Action</th>
+
         </tr>
 <%
 
@@ -36,6 +38,9 @@
             <td><%= ordinateur.getRam() %></td>
             <td><%= ordinateur.getProcesseur() %></td>
             <td><%= ordinateur.getDisque_dur() %></td>
+            <td>
+                <a href="/?id=<%= ordinateur.getId() %>">Modifier</a>
+            </td>
         </tr>
 <%
         }

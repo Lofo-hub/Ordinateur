@@ -13,14 +13,14 @@ public class Ordinateur {
 
     private int id;
     private int  modelid;
-    private String ram;
+    private int ram;
     private String processeur;
     private int disque_dur;
 
     public Ordinateur(){
     }
 
-    public Ordinateur(int id, int modelid, String ram, String processeur, int disque_dur) {
+    public Ordinateur(int id, int modelid, int ram, String processeur, int disque_dur) {
         this.id = id;
         this.modelid = modelid;
         this.ram = ram;
@@ -39,10 +39,10 @@ public class Ordinateur {
     public void setModelid(int modelid) {
         this.modelid = modelid;
     }
-    public String getRam() {
+    public int getRam() {
         return ram;
     }
-    public void setRam(String ram) {
+    public void setRam(int ram) {
         this.ram = ram;
     }
     public String getProcesseur() {
@@ -58,35 +58,35 @@ public class Ordinateur {
         this.disque_dur = disque_dur;
     }
 
-      public void insert() throws SQLException {
-        String sql = "INSERT INTO ordinateur (id_modele, ram, processeur, disque_dur) "
-                   + "VALUES (?, ?, ?, ?)";
+    public void insert(Ordinateur o) throws SQLException {
+        Connection conn = DBConnection.getConnection();
 
-        Connection conn = DBConnection.getConnexion();
-        PreparedStatement ps = conn.prepareStatement(sql);
-
-        ps.setInt(1, this.getModelid());
-        ps.setString(2, this.getRam());
-        ps.setString(3, this.getProcesseur());
-        ps.setInt(4, this.getDisque_dur());
-
-        ps.executeUpdate();
-        ps.close();
+        String sql = "INSERT INTO ordinateur (id_modele, ram, processeur, disque_dur) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, o.getModelid());
+            ps.setInt(2, (o.getRam()));
+            ps.setString(3, o.getProcesseur());
+            ps.setInt(4, o.getDisque_dur());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'insertion de l'ordinateur : " + e.getMessage());
+            throw e;
+        }
     }
 
     public List<Ordinateur> findall() throws SQLException {
         List<Ordinateur> ordinateurs = new ArrayList<>();
         String sql = "SELECT * FROM ordinateur";
 
-        Connection conn = DBConnection.getConnexion();
+        Connection conn = DBConnection.getConnection();
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             Ordinateur o = new Ordinateur();
             o.setId(rs.getInt("id"));
-            o.setModelid(rs.getInt("modelid"));
-            o.setRam(rs.getString("ram"));
+            o.setModelid(rs.getInt("id_modele"));
+            o.setRam(rs.getInt("ram"));
             o.setProcesseur(rs.getString("processeur"));
             o.setDisque_dur(rs.getInt("disque_dur"));
             ordinateurs.add(o);
@@ -95,6 +95,28 @@ public class Ordinateur {
         rs.close();
         ps.close();
         return ordinateurs;
+    }
+
+    public Ordinateur findById(int id) throws SQLException {
+        String sql = "SELECT * FROM ordinateur WHERE id = ?";
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        Ordinateur o = null;
+        if (rs.next()) {
+            o = new Ordinateur();
+            o.setId(rs.getInt("id"));
+            o.setModelid(rs.getInt("id_modele"));
+            o.setRam(rs.getInt("ram"));
+            o.setProcesseur(rs.getString("processeur"));
+            o.setDisque_dur(rs.getInt("disque_dur"));
+        }
+
+        rs.close();
+        ps.close();
+        return o;
     }
 
 

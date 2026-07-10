@@ -28,18 +28,18 @@ public class OrdinateurServlet extends HttpServlet{
         String processeur = req.getParameter("processeur");
         int disque_dur = Integer.parseInt(req.getParameter("disque_dur"));
         
+        try {
         Ordinateur o = new Ordinateur();
         o.setModelid(idmodele);
-        o.setRam(ram);
+        o.setRam(Integer.parseInt(ram));
         o.setProcesseur(processeur);   
         o.setDisque_dur(disque_dur); 
-        try {
-            o.insert();
-            
+        o.insert(o);
+        
         } catch (Exception e) {
             e.printStackTrace();
         }
-        res.sendRedirect(req.getContextPath() + "/ordi");
+    res.sendRedirect(req.getContextPath() + "/ordi");
         
     }
 }
