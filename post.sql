@@ -32,3 +32,6 @@ INSERT INTO marque (libelle) VALUES ('HP');
 INSERT INTO modele (libelle, id_marque, reference) VALUES ('Inspiron', 1, 'Inspiron 15');
 INSERT INTO modele (libelle, id_marque, reference) VALUES ('Pavilion', 2, 'Pavilion 14');
 INSERT INTO modele (libelle, id_marque, reference) VALUES ('XPS', 1, 'XPS 13');
+
+INSERT INTO utilisateur (login, password, role) VALUES ('admin', 'admin', 'admin');
+INSERT INTO utilisateur (login, password, role) VALUES ('user', 'user', 'user');
