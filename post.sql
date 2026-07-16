@@ -20,6 +20,12 @@ CREATE TABLE modele (
     reference VARCHAR(50) not null
 );
 
+CREATE TABLE utilisateur (
+    id serial primary key,
+    login VARCHAR(50) not null,
+    password VARCHAR(50) not null,
+    role VARCHAR(50) not null
+)
 INSERT INTO marque (libelle) VALUES ('Dell');
 INSERT INTO marque (libelle) VALUES ('HP');
 

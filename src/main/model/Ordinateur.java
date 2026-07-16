@@ -74,6 +74,36 @@ public class Ordinateur {
         }
     }
 
+    public void update(Ordinateur o) throws SQLException {
+        Connection conn = DBConnection.getConnection();
+
+        String sql = "UPDATE ordinateur SET id_modele = ?, ram = ?, processeur = ?, disque_dur = ? WHERE id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, o.getModelid());
+            ps.setInt(2, o.getRam());
+            ps.setString(3, o.getProcesseur());
+            ps.setInt(4, o.getDisque_dur());
+            ps.setInt(5, o.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la mise à jour de l'ordinateur : " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public void delete(int id) throws SQLException {
+        Connection conn = DBConnection.getConnection();
+
+        String sql = "DELETE FROM ordinateur WHERE id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la suppression de l'ordinateur : " + e.getMessage());
+            throw e;
+        }
+    }
+
     public List<Ordinateur> findall() throws SQLException {
         List<Ordinateur> ordinateurs = new ArrayList<>();
         String sql = "SELECT * FROM ordinateur";

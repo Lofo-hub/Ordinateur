@@ -39,7 +39,9 @@
             <td><%= ordinateur.getProcesseur() %></td>
             <td><%= ordinateur.getDisque_dur() %></td>
             <td>
-                <a href="/?id=<%= ordinateur.getId() %>">Modifier</a>
+                <a href="${pageContext.request.contextPath}/?id=<%= ordinateur.getId() %>">Modifier</a>
+                <a href="${pageContext.request.contextPath}/ordi?id=<%= ordinateur.getId() %>">Supprimer</a>
+
             </td>
         </tr>
 <%

@@ -12,20 +12,18 @@
             res.setContentType("text/html");
             Ordinateur o = new Ordinateur();
             Modele modele = new Modele();
+
             try {
+                List<Modele> modeleList = modele.getAll();
+                req.setAttribute("Modeles", modeleList);    
                 if (req.getParameter("id") != null) {
                     int id = Integer.parseInt(req.getParameter("id"));
                     req.setAttribute("id", id);
-                    List<Modele> modeleList = modele.getAll();
                     Ordinateur ordi = o.findById(id);
-                    req.setAttribute("Modeles", modeleList);
                     req.setAttribute("Ordinateur", ordi);
                     RequestDispatcher dispatcher = req.getRequestDispatcher("/ind.jsp");
                 dispatcher.forward(req, res);
                 } else {
-                    List<Modele> modeleList = modele.getAll();
-                    System.out.println(modeleList);
-                    req.setAttribute("Modeles", modeleList);
                     RequestDispatcher dispatcher = req.getRequestDispatcher("/ind.jsp");
                     dispatcher.forward(req, res);
                 }
