@@ -15,6 +15,11 @@ version="2.4">
 <url-pattern>/ordi</url-pattern>
 </servlet-mapping>
 
+<servlet-mapping>
+<servlet-name>OrdinateurServlet</servlet-name>
+<url-pattern>/ordi/liste</url-pattern>
+</servlet-mapping>
+
 <servlet>
 <servlet-name>ShowFormOrdiServlet</servlet-name>
 <servlet-class>ShowFormOrdiServlet</servlet-class>
@@ -24,5 +29,48 @@ version="2.4">
 <servlet-name>ShowFormOrdiServlet</servlet-name>
 <url-pattern>/</url-pattern>
 </servlet-mapping>
+
+<servlet>
+<servlet-name>LoginServlet</servlet-name>
+<servlet-class>LoginServlet</servlet-class>
+</servlet>
+
+
+<servlet-mapping>
+<servlet-name>LoginServlet</servlet-name>
+<url-pattern>/log</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>OrdiEtatServlet</servlet-name>
+<servlet-class>OrdiEtatServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>OrdiEtatServlet</servlet-name>
+<url-pattern>/ordietat</url-pattern>
+</servlet-mapping>
+
+<filter>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+    <init-param>
+        <param-name>cors.allowed.origins</param-name>
+        <param-value>http://localhost</param-value>
+    </init-param>
+    <init-param>
+        <param-name>cors.allowed.methods</param-name>
+        <param-value>GET,POST,OPTIONS</param-value>
+    </init-param>
+    <init-param>
+        <param-name>cors.allowed.headers</param-name>
+        <param-value>Content-Type</param-value>
+    </init-param>
+</filter>
+
+<filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
 
 </web-app>

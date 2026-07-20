@@ -1,9 +1,11 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,6 +149,26 @@ public class Ordinateur {
         rs.close();
         ps.close();
         return o;
+    }
+
+    public boolean insererHistorique(int idOrdinateur, int idEtat,Date date, String observation) throws SQLException {
+        Connection conn = DBConnection.getConnection();
+
+        String sql = "INSERT INTO historique (id_ordinateur, id_etat, date_entre, observation) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            SimpleDateFormat formatteur = new SimpleDateFormat("yyyy-MM-dd");
+            String dateFormatee = formatteur.format(date);
+
+            ps.setInt(1, idOrdinateur);
+            ps.setInt(2, idEtat);
+            ps.setDate(3, dateFormatee != null ? Date.valueOf(dateFormatee) : null);
+            ps.setString(4, observation);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'insertion dans l'historique : " + e.getMessage());
+            return false;
+        }
+        return true;
     }
 
 

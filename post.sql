@@ -24,8 +24,21 @@ CREATE TABLE utilisateur (
     id serial primary key,
     login VARCHAR(50) not null,
     password VARCHAR(50) not null,
-    role VARCHAR(50) not null
 )
+
+CREATE TABLE etat (
+    id serial primary key,
+    libelle VARCHAR(50) not null
+);
+
+CREATE TABLE historique (
+    id serial primary key,
+    id_ordinateur INT not null references ordinateur(id),
+    id_etat INT not null references etat(id),
+    date_entre TIMESTAMP not null,
+    observation VARCHAR(255) not null
+);
+
 INSERT INTO marque (libelle) VALUES ('Dell');
 INSERT INTO marque (libelle) VALUES ('HP');
 
@@ -35,3 +48,6 @@ INSERT INTO modele (libelle, id_marque, reference) VALUES ('XPS', 1, 'XPS 13');
 
 INSERT INTO utilisateur (login, password, role) VALUES ('admin', 'admin', 'admin');
 INSERT INTO utilisateur (login, password, role) VALUES ('user', 'user', 'user');
+
+INSERT INTO etat (libelle) VALUES ('Fonctionnel');
+INSERT INTO etat (libelle) VALUES ('Disfonctionnel');
