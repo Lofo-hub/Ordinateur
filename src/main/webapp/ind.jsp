@@ -15,6 +15,7 @@
     <title>Formulaire</title>
 </head>
 <body>
+    <h1> ETU4071<h1>
     <form action="${pageContext.request.contextPath}/ordi" method="post">
     <input type="hidden" name="id" value="<%= ordinateur != null ? ordinateur.getId() : 0 %>">
     <label for="idmodele">Modele :</label>
